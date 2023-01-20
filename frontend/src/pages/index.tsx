@@ -6,6 +6,7 @@ import styles from '../../styles/home.module.scss';
 import logoImg from '../../public/logo.svg';
 
 import { Input } from '../components/ui/Input';
+import { Button } from '../components/ui/Button';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,15 +23,22 @@ export default function Home() {
       <div className={styles.login}>
         <form>
           <Input
-          placeholder="Digite seu email"
-          type="text"
+            placeholder="Digite seu email"
+            type="text"
           />
 
           <Input
-          placeholder="Sua senha"
-          type="password"
+            placeholder="Sua senha"
+            type="password"
           />
 
+          <Button
+            type="submit"
+            loading={false}
+          >
+            Acessar
+          </Button>
+      
         </form>
       </div>
 
