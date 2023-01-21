@@ -1,4 +1,4 @@
-import { useContext, FormEvent} from 'react';
+import { useContext, FormEvent, useState} from 'react';
 import { Inter } from '@next/font/google'
 import Head from 'next/head';
 import Image from 'next/image';
@@ -19,12 +19,17 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const { signIn } = useContext(AuthContext)
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [loading, setLoading] = useState(false);
+
   async function handleLogin(event: FormEvent){
     event.preventDefault();
 
     let data = {
-      email: "algum@teste.com",
-      password: "123123"
+      email,
+      password
     }
 
     await signIn(data)
@@ -44,11 +49,15 @@ export default function Home() {
           <Input
             placeholder="Digite seu email"
             type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
             placeholder="Sua senha"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
