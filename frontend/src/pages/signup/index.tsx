@@ -1,6 +1,6 @@
 import { Inter } from '@next/font/google'
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -11,12 +11,15 @@ import logoImg from '../../../public/logo.svg';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 
+import { AuthContext } from '../../contexts/AuthContext';
+
 import Link from 'next/link';
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function SignUp() {
+  const { signUp } = useContext(AuthContext);
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,6 +36,16 @@ export default function SignUp() {
     }
 
     setLoading(true);
+
+    let data = {
+      name,
+      email,
+      password
+    }
+
+    await signUp(data);
+
+    setLoading(false);
 
   }
   
