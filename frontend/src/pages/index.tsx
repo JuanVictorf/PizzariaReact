@@ -14,6 +14,8 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import Link from 'next/link';
 
+import { canSSRGuest } from '../utils/canSSRGuest';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -90,3 +92,11 @@ export default function Home() {
     </>
   )
 }
+
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  
+  return{
+    props: {}
+  }
+})
